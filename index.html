@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maidan-Local _ Kolkata Jerseys</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12">
+ 
+  <link rel="icon" href="assets/favicon.png">
+
+</head>
+   
+  <body class="bg-[#fffef7] font-baloo text-gray-800">
+    
+  <!-- Enhanced Navbar -->
+<header class="fixed top-0 left-0 w-full bg-white shadow-md z-50 transition-all duration-300 ease-in-out">
+  <div class="max-w-8xl mx-auto px-8 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="#" class="text-3xl font-bold text-green-500 ">Maidan-Local</a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex space-x-10 m-12 text-gray-900 font-medium">
+        <a href="#home" class="hover:text-green-400  transition text-xl">Home</a>
+        <a href="#shop" class="hover:text-green-400 transition text-xl">Shop</a>
+        <a href="#contact" class="hover:text-green-400 transition text-xl">Contact</a>
+
+        <!-- search button -->
+
+      <div class="flex items-center gap-2 ml-auto">
+      <input
+      type="text"
+     placeholder="Search jerseys..."
+     class="px-3 py-1.5 rounded-lg border border-gray-300  focus:outline-none focus:ring-2 focus:ring-green-500"
+     id="searchInput"
+   />
+     <button
+     onclick="searchJersey()"
+     class="bg-green-400 text-white px-8 py-1.5 rounded hover:bg-green-800 transition shadow-lg shadow-green-500/50 flex items-center gap-2"
+     aria-label="Search Jerseys"
+     id="searchButton" 
+     >
+       <i class="fas fa-search"></i>
+     Search
+     </button>
+</div>
+      
+      </nav>
+
+      <!-- Cart + Hamburger -->
+      <div class="flex items-center space-x-4 text-lg">
+        <button id="cart-btn" class="relative">
+          🛒
+          <span id="cart-count" class="absolute -top-4 -right-4 bg-green-400 text-black text-xs rounded-full px-1">0</span>
+        </button>
+
+        <!-- Hamburger Button -->
+        <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none text-gray-700 hover:text-green-400 transition">
+          ☰
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden fixed inset-0 bg-black bg-opacity-50 hidden z-40">
+    <div class="bg-white w-3/4 h-full p-6">
+      <button id="menu-close" class="text-2xl absolute top-4 right-6"><i class="fa-regular fa-circle-xmark text-gray-700 hover:text-green-400 transition"></i></button>
+      <nav class="mt-10 flex flex-col space-y-6 text-gray-800 font-semibold">
+        <a href="#home" class="hover:text-green-400 transition">Home</a>
+        <a href="#shop" class="hover:text-green-400 transition">Shop</a>
+        <a href="#contact" class="hover:text-green-400 transition">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+  
+</header>
+
+
+  <!-- Hero Section -->
+<section id="home" class="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+    <source src="assets/kolkata-maidan.mp4" type="video/mp4" />
+    <!-- Fallback Image -->
+    <img src="assets/mohunbagan.jpg" alt="Kolkata Maidan" class="object-cover w-full h-full" />
+  </video>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+
+  <!-- Hero Content -->
+  <div class="relative z-20 text-center px-4 max-w-2xl animate-fade-in">
+    <h2 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
+       <span id="typing-text" class="text-white-400"></span>
+    </h2>
+    <p class="text-lg md:text-xl mb-6 font-medium"> Experience the legacy of কলকাতা </p>
+    <a href="#shop" class="bg-green-400 text-white-800 px-6 py-3 rounded-lg hover:bg-green-700 transition transform hover:scale-105 shadow-lg shadow-green-500/50">Browse Jerseys</a>
+
+    <!-- Countdown Offer (Optional) -->
+    <div class="mt-6 text-sm font-medium text-green-300" id="countdown">
+      🎉 Offer ends in <span id="timer">00:00:00</span>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Product Grid -->
+  <main id="shop" class="max-w-7xl mx-auto px-4 py-10">
+    <h2 class="text-3xl font-bold text-center text-green-800 mb-8">🔥 Trending Jerseys</h2>
+    <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3" id="product-list">
+      <!-- Products injected by JS -->
+    </div>
+  </main>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg w-96 max-w-full">
+      <h3 class="text-xl font-bold mb-4">Your Cart</h3>
+      <ul id="cart-items" class="divide-y"></ul>
+      <div class="mt-4 text-right">
+        <button id="close-cart" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition shadow-lg shadow-green-700/70">Close</button>
+      </div>
+    </div>
+  </div>
+
+    
+
+  <section id="shop-More" class="scroll-mt-20 py-16 bg-white px-4">
+  <h2 class="text-3xl font-bold text-center text-green-800 mb-8">🛍️ Shop More Jerseys</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+
+    <!-- East Bengal -->
+    <div class="bg-yellow-50 p-4 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105">
+      <img src="https://via.placeholder.com/300x300.png?text=East+Bengal+Home" alt="East Bengal Jersey" class="w-full h-auto rounded" />
+      <h3 class="text-lg font-semibold mt-2">East Bengal Home Jersey</h3>
+      <p class="text-green-800 font-bold">₹999</p>
+      <button onclick="addToCart('East Bengal Home Jersey')" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition shadow-lg shadow-green-700/70 ">Add to Cart</button>
+    </div>
+
+    <!-- Mohun Bagan -->
+    <div class="bg-yellow-50 p-4 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105">
+      <img src="https://via.placeholder.com/300x300.png?text=Mohun+Bagan+Away" alt="Mohun Bagan Jersey" class="w-full h-auto rounded" />
+      <h3 class="text-lg font-semibold mt-2">Mohun Bagan Away Jersey</h3>
+      <p class="text-green-800 font-bold">₹999</p>
+      <button onclick="addToCart('Mohun Bagan Away Jersey')" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition shadow-lg shadow-green-700/70">Add to Cart</button>
+    </div>
+
+    <!-- Kolkata FC -->
+    <div class="bg-yellow-50 p-4 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105">
+      <img src="https://via.placeholder.com/300x300.png?text=Kolkata+FC+2025" alt="Kolkata FC Jersey" class="w-full h-auto rounded" />
+      <h3 class="text-lg font-semibold mt-2">Kolkata FC 2025 Edition</h3>
+      <p class="text-green-800 font-bold">₹1099</p>
+      <button onclick="addToCart('Kolkata FC 2025 Jersey')" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition shadow-lg shadow-green-700/70">Add to Cart</button>
+    </div>
+
+    <!-- Custom Maidan Local -->
+    <div class="bg-yellow-50 p-4 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105">
+      <img src="https://via.placeholder.com/300x300.png?text=Maidan+Local+Edition" alt="Maidan Local Jersey" class="w-full h-auto rounded" />
+      <h3 class="text-lg font-semibold mt-2">Maidan Local Exclusive</h3>
+      <p class="text-green-800 font-bold">₹1299</p>
+      <button onclick="addToCart('Maidan Local Exclusive Jersey')" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition shadow-lg shadow-green-700/70">Add to Cart</button>
+    </div>
+
+    <!-- Derby Special -->
+    <div class="bg-yellow-50 p-4 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105">
+      <img src="https://via.placeholder.com/300x300.png?text=Derby+Special" alt="Derby Special" class="w-full h-auto rounded" />
+      <h3 class="text-lg font-semibold mt-2">Derby Day Special</h3>
+      <p class="text-green-800 font-bold">₹1199</p>
+      <button onclick="addToCart('Derby Day Special Jersey')" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition shadow-lg shadow-green-700/70">Add to Cart</button>
+    </div>
+
+    <!-- Vintage Jersey -->
+    <div class="bg-yellow-50 p-4 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105">
+      <img src="https://via.placeholder.com/300x300.png?text=Vintage+Kolkata" alt="Vintage Kolkata" class="w-full h-auto rounded" />
+      <h3 class="text-lg font-semibold mt-2">Vintage Kolkata 90s Jersey</h3>
+      <p class="text-green-800 font-bold">₹899</p>
+      <button onclick="addToCart('Vintage Kolkata 90s Jersey')" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition shadow-lg shadow-green-700/70">Add to Cart</button>
+    </div>
+  </div>
+</section>
+  
+    </div>
+  </div>
+</section>
+    
+
+<!-- 📬 Contact Us Section -->
+<section id="contact" class="bg-yellow-100 py-16 px-6">
+  <div class="max-w-3xl mx-auto bg-white p-10 rounded-xl shadow-lg">
+    
+    <!-- Title -->
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-extrabold text-green-900">📬 Contact Us</h2>
+      <p class="mt-2 text-gray-600 text-sm">We’d love to hear from you! Please fill out the form below.</p>
+    </div>
+
+    <!-- Contact Form -->
+    <form id="contact-form" class="space-y-6">
+      <!-- Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+        <div class="relative mt-1">
+          <input type="text" id="name" name="name" required
+            placeholder="Enter your name"
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-700 focus:border-green-700 transition" />
+          <i class="fas fa-user absolute left-3 top-3.5 text-gray-400"></i>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+        <div class="relative mt-1">
+          <input type="email" id="email" name="email" required
+            placeholder="you@example.com"
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-700 focus:border-green-700 transition" />
+          <i class="fas fa-envelope absolute left-3 top-3.5 text-gray-400"></i>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+        <div class="relative mt-1">
+          <textarea id="message" name="message" rows="5" required
+            placeholder="Your message here..."
+            class="w-full pl-4 pr-4 pt-3 border border-gray-300 rounded-md shadow-sm focus:ring-green-700 focus:border-green-700 transition"></textarea>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center">
+        <button type="submit"
+          class="bg-green-500 hover:bg-green-800 text-white font-semibold px-8 py-2 rounded-md transition duration-300 transform hover:scale-105 shadow-lg shadow-green-700/70 ">
+          ✉️ Send Message
+        </button>
+        <p id="form-msg" class="text-green-700 font-medium mt-4 hidden">✅ Message sent successfully!</p>
+      </div>
+    </form>
+    
+  </div>
+</section>
+
+
+
+  <!-- Footer -->
+ <footer class="bg-green-950 text-white py-10 px-4 mt-20">
+  <div class="max-w-4xl mx-auto text-center space-y-6">
+
+    <!-- Logo and Tagline -->
+    <div>
+      <h2 class="text-2xl font-bold tracking-wider">Maidan-Local</h2>
+      <p class="text-sm text-gray-300 mt-1">Celebrating Kolkata’s football heritage through jerseys In India</p>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="flex justify-center space-x-5 text-xl">
+      <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" class="hover:text-blue-500 transition">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" class="hover:text-pink-500 transition">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" aria-label="YouTube" class="hover:text-red-500 transition">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn" class="hover:text-blue-400 transition">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" class="hover:text-sky-400 transition">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://wa.me/919999999999" target="_blank" aria-label="WhatsApp" class="hover:text-green-400 transition">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="mailto:info@maidanlocal.com" aria-label="Email" class="hover:text-yellow-300 transition">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="text-sm text-gray-300">
+      <p class="text-s">Email: <a href="mailto:info@maidanlocal.com" class="hover:text-yellow-400">info@maidanlocal.com</a></p>
+      <p class="text-s">Phone: <a href="tel:+919999999999" class="hover:text-yellow-400">+91 99999 99999</a></p>
+      <p class="text-lg">Location: Kolkata, West Bengal</p>
+    </div>
+
+    <!-- Copyright -->
+    <p class="text-lg text-white-200 pt-4 border-t border-gray-200">
+      © 2025 <strong>Maidan-Local</strong> | Crafted with Love in কলকাতা
+    </p>
+
+  </div>
+   <!--Back to Top Button-->
+  <div class="fixed bottom-4 right-4">
+    <a href="#home" class=" text-white p-3 transition transform hover:scale-105 ">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+</footer>
+
+    <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+ 
+
+</body>
+</html>
